@@ -103,5 +103,19 @@ public class MainController {
 
     }
 
+    @GetMapping("/mbti/{name}") // {name} 값 받아오려면 아래에 @PathVariable 쓰면 됨.
+    @ResponseBody
+    public String showMbti(@PathVariable String name) {
+
+        // switch문 이렇게 사용하면 break 생략 가능. switch 앞에 바로 return 붙일 수 있음.
+       return switch ( name ) {
+           case "홍길동" -> "INFP";
+           case "홍길순" -> "INFJ";
+           case "임꺽정" -> "ENFP";
+           case "손정아" -> "ENFJ";
+           default -> "모름";
+       };
+    }
+
 }
 
