@@ -3,6 +3,9 @@ package com.ll.exam.sbb;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -56,6 +59,15 @@ public class MainController {
         return a + b;
     }
 
+    @GetMapping("/plus2")
+    @ResponseBody
+    public void showPlus2(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int a = Integer.parseInt(req.getParameter("a"));
+        int b = Integer.parseInt(req.getParameter("b"));
+
+        resp.getWriter().append(a + b + "");
+    }
+
     @GetMapping("/minus")
     @ResponseBody
     public int showMinus(int a, int b) {
@@ -90,5 +102,6 @@ public class MainController {
                 .collect(Collectors.joining("<br>\n")); //<br>을 기준으로 하나의 문장으로 합친다.
 
     }
+
 }
 
