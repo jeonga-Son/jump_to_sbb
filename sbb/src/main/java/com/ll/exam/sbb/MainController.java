@@ -1,5 +1,6 @@
 package com.ll.exam.sbb;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -109,15 +110,15 @@ public class MainController {
     public String showMbti(@PathVariable String name) {
 
         // switch문 이렇게 사용하면 break 생략 가능. switch 앞에 바로 return 붙일 수 있음.
-       return switch ( name ) {
-           case "홍길순" -> {
+        return switch (name) {
+            case "홍길순" -> {
                 char j = 'J';
                 yield "INF" + "J";
-           }
-           case "임꺽정" -> "ENFP";
-           case "손정아", "홍길동" -> "ENFJ";
-           default -> "모름";
-       };
+            }
+            case "임꺽정" -> "ENFP";
+            case "손정아", "홍길동" -> "ENFJ";
+            default -> "모름";
+        };
     }
 
     @GetMapping("/saveSession/{name}/{value}")
@@ -138,9 +139,26 @@ public class MainController {
         //HttpSession session = req.getSession();  이렇게 안하고 바로 session 사용할 수 있음.
         // req => 쿠키 => JSESSIONID => 세션을 얻을 수 있다.
 
-        String value = (String)session.getAttribute(name);
+        String value = (String) session.getAttribute(name);
 
         return "세션변수 %s의 값이 %s 입니다.".formatted(name, value);
     }
+
+    @GetMapping("/addArticle")
+    @ResponseBody
+    public String addArticles(String title, String body) {
+        int id = 1;
+        Article article = new Article(id, title, body);
+
+        return "%d번 게시물이 생성되었습니다.".formatted(id);
+    }
+
+    @AllArgsConstructor
+    class Article {
+        private final int id;
+        private final String title;
+        private final String body;
+    }
+
 }
 
