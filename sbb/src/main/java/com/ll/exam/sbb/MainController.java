@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
+//싱글톤 작성
+//@Controller 달아줘야 사용함
 public class MainController {
 
     private int increaseNo = -1;
