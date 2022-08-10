@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,5 +21,10 @@ public class Question {
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
     private LocalDateTime createDate;
+
+    //이 컬럼은 생기지않음. 자바쪽에서 편하려고 달아놓음. 지워도 상관없음. answer 어디에 적혀있는지 알려주는 것.
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answerList;
 }
