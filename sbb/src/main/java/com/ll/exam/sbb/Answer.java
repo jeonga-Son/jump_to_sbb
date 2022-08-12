@@ -20,5 +20,6 @@ public class Answer {
     private LocalDateTime createDate;
 
     @ManyToOne //이거를 붙여야 됨.
+    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Question question; //question에 참조값이 들어감
 }
