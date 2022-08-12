@@ -19,7 +19,7 @@ public class Answer {
 
     private LocalDateTime createDate;
 
-    @ManyToOne //이거를 붙여야 됨.
-    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne //이거를 붙여야 됨. 이거때문에 ForeignKey 만들어짐.
+    @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)) //create시 ForeignKey 제거
     private Question question; //question에 참조값이 들어감
 }
