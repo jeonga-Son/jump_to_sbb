@@ -20,7 +20,15 @@ class SbbApplicationTests {
 	private QuestionRepository questionRepository;
 
 	@Test
-	void testJpa() {
+	void contextLoads() {}
+
+	@Test
+	void testJpa0() {
+		questionRepository.truncate();
+	}
+
+	@Test
+	void testJpa1() {
 		Question q1 = new Question();
 		q1.setSubject("sbb가 무엇인가요?");
 		q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -86,4 +94,6 @@ class SbbApplicationTests {
 		this.questionRepository.delete(q);
 		assertEquals(1, this.questionRepository.count());
 	}
+
+
 }
