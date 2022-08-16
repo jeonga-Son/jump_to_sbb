@@ -13,7 +13,7 @@
         <td>
             [[${question.subject}]]
         </td>
-        <td th:text="${question.createDate}"></td>
+        <td th:text="|Date. ${#strings.substring(question.createDate, 2, 16)}|"></td>
     </tr>
     </tbody>
 </table>
