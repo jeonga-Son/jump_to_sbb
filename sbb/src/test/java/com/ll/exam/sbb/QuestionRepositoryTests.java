@@ -45,6 +45,7 @@ class QuestionRepositoryTests {
     }
 
     public static void clearData(QuestionRepository questionRepository) {
+        questionRepository.deleteAll(); //DELETE FROM question; 원래 truncate로 지워야 데이터가1번부터 나와서 안썼음.
         questionRepository.truncateTable();
     }
 

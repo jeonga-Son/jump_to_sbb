@@ -16,10 +16,11 @@ public interface RepositoryUtil {
     @Query(value = "SET FOREIGN_KEY_CHECKS = 1", nativeQuery = true)
     void enableForeignKeyChecks();
 
+    //truncate를 쓰면 JPA랑 궁합이 안좋음.
     default void truncateTable() {
-        disableForeignKeyChecks();
+        //disableForeignKeyChecks();
         truncate();
-        enableForeignKeyChecks();
+        //enableForeignKeyChecks();
     }
 
     void truncate();
