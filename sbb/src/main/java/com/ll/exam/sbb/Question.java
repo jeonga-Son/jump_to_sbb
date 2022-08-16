@@ -25,6 +25,6 @@ public class Question {
     private LocalDateTime createDate;
 
     //이 컬럼은 생기지않음. 자바쪽에서 편하려고 달아놓음. 지워도 상관없음. answer 어디에 적혀있는지 알려주는 것.
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER) // 원래는 fetch타입이 lazy인데 EAGER로 변경
     private List<Answer> answerList;
 }
