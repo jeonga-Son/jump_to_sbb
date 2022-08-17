@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+
+@RequestMapping("/question")
 @Controller
 @RequiredArgsConstructor // 생성자 주입
 // 컨트롤러는 Repository가 있는지 몰라야 한다.
@@ -19,7 +21,7 @@ import java.util.List;
 public class QuestionController {
     // @Autowired // 필드 주입
     private final QuestionService questionService;
-    @RequestMapping("/question/list")
+    @RequestMapping("/list")
     // 이 자리에 @ResponseBody가 없으면 resources/question_list/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
         List<Question> questionList = questionService.getList();
@@ -30,7 +32,7 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/detail/{id}")
+    @RequestMapping("/detail/{id}")
     //model 객체는 Controller에서 생성한 데이터를 담아서 View로 전달할 때 사용하는 객체이다.
     //addAttribute("키", "값") 메소드를 사용하여 전달할 데이터를 세팅한다.
     public String detail(Model model, @PathVariable int id) {
