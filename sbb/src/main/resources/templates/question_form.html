@@ -5,23 +5,23 @@
 
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <!--public String questionCreate() 이렇게 썼으면 ? 써야함.-->
+    <!--public String questionCreate(QuestionForm questionForm) 매개변수에 객체를 사용하면
+    모델에 따로 넣어주지 않아도 return 받는 템플릿에서 객체 사용이 가능함.-->
 
-    <div class="alert alert-danger" role="alert" th:if="${subjectErrorMsg != null}" th:text="${subjectErrorMsg}"></div>
-    <div class="alert alert-danger" role="alert" th:if="${contentErrorMsg != null}" th:text="${contentErrorMsg}"></div>
-    <form th:action="@{/question/create}" method="POST">
+    <form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+        </div>
         <div class="mb-3">
             <label class="form-label">제목</label>
-            <!--public String questionCreate() 이렇게 썼으면 ? 써야함.-->
-            <input th:value="${questionForm?.subject}" type="text" name="subject" class="form-control" placeholder="제목을 입력해주세요.">
+            <input type="text" th:field="*{subject}" class="form-control">
         </div>
-
         <div class="mb-3">
             <label class="form-label">내용</label>
-            <textarea th:text="${questionForm?.content}" name="content" class="form-control" rows="10" placeholder="내용을 입력해주세요."></textarea>
+            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
         </div>
-
-        <button type="submit" class="btn btn-primary my-2">저장하기</button>
-
+        <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
 </div>
 
