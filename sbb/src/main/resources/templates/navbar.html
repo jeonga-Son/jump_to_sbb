@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+>
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">SBB</a>
+        <!--Collapse(콜랩스) JavaScript 플러그인은, 콘텐츠의 표시와 숨김에 사용됩니다.-->
+        <!--넓은화면에서 숨어있음. 좁은화면에서 보임.-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--좁은화면에서는숨어있음. 넓은화면에서는 보임.-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">로그인</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</html>
