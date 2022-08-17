@@ -141,7 +141,7 @@ class QuestionRepositoryTests {
     @Test
     void createManySampleData() {
         //대량데이터 생성하고싶지 않으면 false 로 바꾸면 됨.
-        boolean run = true;
+        boolean run = false;
 
         if(run == false) return;
 
