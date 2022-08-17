@@ -1,11 +1,10 @@
 package com.ll.exam.sbb.question;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 @Controller
 @RequiredArgsConstructor // 생성자 주입
@@ -29,6 +28,17 @@ public class QuestionController {
         model.addAttribute("questionList", questionList);
 
         return "question_list";
+    }
+
+    @RequestMapping("/question/detail/{id}")
+    //model 객체는 Controller에서 생성한 데이터를 담아서 View로 전달할 때 사용하는 객체이다.
+    //addAttribute("키", "값") 메소드를 사용하여 전달할 데이터를 세팅한다.
+    public String detail(Model model, @PathVariable int id) {
+        Question question = questionService.getQuestion(id);
+
+        model.addAttribute("question", question);
+
+        return "question_detail";
     }
 
 }
