@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -106,6 +109,15 @@ class QuestionRepositoryTests {
     }
 
     @Test
+    void findAllPageable() {
+        // Pageable : 한 페이지에 몇개의 아이템이 나와야 하는지 + 현재 몇 페이지인지)
+       Pageable pageable = PageRequest.of(0, lastSampleDataId);
+       Page<Question> page = questionRepository.findAll(pageable);
+
+        assertThat(page.getTotalPages()).isEqualTo(1);
+    }
+
+    @Test
     void findBySubject() {
         Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
         assertThat(q.getId()).isEqualTo(1);
@@ -128,6 +140,7 @@ class QuestionRepositoryTests {
 
     @Test
     void createManySampleData() {
+        //대량데이터 생성하고싶지 않으면 false 로 바꾸면 됨.
         boolean run = true;
 
         if(run == false) return;
