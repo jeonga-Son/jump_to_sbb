@@ -16,13 +16,11 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @SpringBootTest
-class QuestionRepositoryTests {
-
+public class QuestionRepositoryTests {
     @Autowired
     private QuestionRepository questionRepository;
-    private static int lastSampleDataId;
+    private static long lastSampleDataId;
 
     @BeforeEach
     void beforeEach() {
@@ -30,18 +28,18 @@ class QuestionRepositoryTests {
         createSampleData();
     }
 
-    public static int createSampleData(QuestionRepository questionRepository) {
+    public static long createSampleData(QuestionRepository questionRepository) {
         Question q1 = new Question();
         q1.setSubject("sbb가 무엇인가요?");
         q1.setContent("sbb에 대해서 알고 싶습니다.");
         q1.setCreateDate(LocalDateTime.now());
-        questionRepository.save(q1);  // 첫번째 질문 저장
+        questionRepository.save(q1);
 
         Question q2 = new Question();
         q2.setSubject("스프링부트 모델 질문입니다.");
         q2.setContent("id는 자동으로 생성되나요?");
         q2.setCreateDate(LocalDateTime.now());
-        questionRepository.save(q2);  // 두번째 질문 저장
+        questionRepository.save(q2);
 
         return q2.getId();
     }
@@ -51,7 +49,7 @@ class QuestionRepositoryTests {
     }
 
     public static void clearData(QuestionRepository questionRepository) {
-        questionRepository.deleteAll(); //DELETE FROM question; 원래 truncate로 지워야 데이터가1번부터 나와서 안썼음.
+        questionRepository.deleteAll(); // DELETE FROM question;
         questionRepository.truncateTable();
     }
 
@@ -65,13 +63,13 @@ class QuestionRepositoryTests {
         q1.setSubject("sbb가 무엇인가요?");
         q1.setContent("sbb에 대해서 알고 싶습니다.");
         q1.setCreateDate(LocalDateTime.now());
-        questionRepository.save(q1);  // 첫번째 질문 저장
+        questionRepository.save(q1);
 
         Question q2 = new Question();
         q2.setSubject("스프링부트 모델 질문입니다.");
         q2.setContent("id는 자동으로 생성되나요?");
         q2.setCreateDate(LocalDateTime.now());
-        questionRepository.save(q2);  // 두번째 질문 저장
+        questionRepository.save(q2);
 
         assertThat(q1.getId()).isEqualTo(lastSampleDataId + 1);
         assertThat(q2.getId()).isEqualTo(lastSampleDataId + 2);
@@ -81,20 +79,19 @@ class QuestionRepositoryTests {
     void 삭제() {
         assertThat(questionRepository.count()).isEqualTo(lastSampleDataId);
 
-        Question q = this.questionRepository.findById(1).get();
+        Question q = this.questionRepository.findById(1L).get();
         questionRepository.delete(q);
 
         assertThat(questionRepository.count()).isEqualTo(lastSampleDataId - 1);
     }
 
-
     @Test
     void 수정() {
-        Question q = this.questionRepository.findById(1).get();
+        Question q = this.questionRepository.findById(1L).get();
         q.setSubject("수정된 제목");
         questionRepository.save(q);
 
-        q = this.questionRepository.findById(1).get();
+        q = this.questionRepository.findById(1L).get();
 
         assertThat(q.getSubject()).isEqualTo("수정된 제목");
     }
@@ -110,9 +107,9 @@ class QuestionRepositoryTests {
 
     @Test
     void findAllPageable() {
-        // Pageable : 한 페이지에 몇개의 아이템이 나와야 하는지 + 현재 몇 페이지인지)
-       Pageable pageable = PageRequest.of(0, lastSampleDataId);
-       Page<Question> page = questionRepository.findAll(pageable);
+        // Pageble : 한 페이지에 몇개의 아이템이 나와야 하는지 + 현재 몇 페이지인지)
+        Pageable pageable = PageRequest.of(0, (int) lastSampleDataId);
+        Page<Question> page = questionRepository.findAll(pageable);
 
         assertThat(page.getTotalPages()).isEqualTo(1);
     }
@@ -140,10 +137,9 @@ class QuestionRepositoryTests {
 
     @Test
     void createManySampleData() {
-        //대량데이터 생성하고싶지 않으면 false 로 바꾸면 됨.
         boolean run = false;
 
-        if(run == false) return;
+        if (run == false) return;
 
         IntStream.rangeClosed(3, 300).forEach(id -> {
             Question q = new Question();
