@@ -30,4 +30,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 스프링 시스템에 객체를 등록한다.
+    // @Configuration 라는 어노테이션을 가진 클래스에서만 사용가능하다.
+    // UserRepository에 만들어도 상관 없음
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
