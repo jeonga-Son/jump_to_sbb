@@ -40,9 +40,13 @@ public class UserServiceTests {
     }
 
     public static void clearData(UserRepository userRepository, AnswerRepository answerRepository, QuestionRepository questionRepository) {
-        AnswerRepositoryTests.clearData(answerRepository, questionRepository);
-        QuestionRepositoryTests.clearData(questionRepository);
-        userRepository.deleteAll(); // DELETE FROM site_user;
+        answerRepository.deleteAll();
+        answerRepository.truncateTable();
+
+        questionRepository.deleteAll();
+        questionRepository.truncateTable();
+
+        userRepository.deleteAll();
         userRepository.truncateTable();
     }
 
@@ -56,7 +60,3 @@ public class UserServiceTests {
         userService.create("user2", "user2@email.com", "1234");
     }
 }
-
-
-//SiteUser가 있어야 => Question 있을수있음 => Answer 있을 수 있음.
-// 지우는건 반대로!
