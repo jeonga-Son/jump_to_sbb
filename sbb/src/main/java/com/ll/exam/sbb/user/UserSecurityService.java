@@ -32,7 +32,7 @@ public class UserSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if ("admin".equals(username)) {
-            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue())); //UserRole.ADMIN.getValue()) 대신 ROLE_ADMIN 써도 되나 오타 있을 수 있으므로 이렇게 씀.
         } else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
