@@ -29,6 +29,17 @@ public class UserSecurityService implements UserDetailsService {
         );
 
         // 권한들을 담을 빈 리스트를 만든다.
+        // List로 권한을 만든 이유는 권한이 1개가 아닐 수 있기 때문이다.
+        // 예를들어서 일반권한 뿐만아니라 관리자 권한도 추가할 수있다.
+        //  if ("admin".equals(username)) {
+        //            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+        // 이렇게 뿐만아니라
+        // if ("admin".equals(username)) {
+        //            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+        //            authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
+
+        //이렇게도 가능하다. 권한을 하나씩 주더라도 List로 한다.
+
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if ("admin".equals(username)) {

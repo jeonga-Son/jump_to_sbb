@@ -1,6 +1,7 @@
 package com.ll.exam.sbb.answer;
 
 import com.ll.exam.sbb.question.Question;
+import com.ll.exam.sbb.user.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +23,7 @@ public class Answer {
 
     @ManyToOne //이거를 붙여야 됨. 이거때문에 ForeignKey 만들어짐.
     private Question question; //question에 참조값이 들어감
+
+    @ManyToOne
+    private SiteUser author;
 }
