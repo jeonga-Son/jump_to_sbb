@@ -21,6 +21,8 @@ public class Answer {
 
     private LocalDateTime createDate;
 
+    private LocalDateTime modifyDate;
+
     @ManyToOne //이거를 붙여야 됨. 이거때문에 ForeignKey 만들어짐.
     private Question question; //question에 참조값이 들어감
 
