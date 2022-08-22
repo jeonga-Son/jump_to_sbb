@@ -57,6 +57,7 @@ public class QuestionController {
         return "question_form";
     }
 
+    //창 여러개 띄우고 하나는 로그아웃하고 로그아웃 못한 나머지 창에서 작성하게 될 수도 있으므로.
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String questionCreate(Principal principal, Model model, @Valid QuestionForm questionForm, BindingResult bindingResult) {
