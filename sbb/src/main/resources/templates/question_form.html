@@ -9,7 +9,7 @@
     <!--public String questionCreate(QuestionForm questionForm) 매개변수에 객체를 사용하면
     모델에 따로 넣어주지 않아도 return 받는 템플릿에서 객체 사용이 가능함.-->
 
-    <form th:object="${questionForm}" method="post">
+    <form th:action="@{''}" th:object="${questionForm}" method="post">
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
             <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
         </div>
