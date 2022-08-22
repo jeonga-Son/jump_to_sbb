@@ -35,6 +35,7 @@
                 </div>
             </div>
 
+            <!--타임리프가 스프링시큐리티 쓸 수 있도록 build.gradle에서 설정함.-->
             <div class="my-3">
                 <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-outline-secondary"
                    sec:authorize="isAuthenticated()"
