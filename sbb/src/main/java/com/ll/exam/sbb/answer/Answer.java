@@ -30,6 +30,7 @@ public class Answer {
     @ManyToOne
     private SiteUser author;
 
+    //List를 사용하면 한번은 괜찮은데 계속 정보가 들어감?
     @ManyToMany
     Set<SiteUser> voter;
 }
