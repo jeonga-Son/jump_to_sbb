@@ -14,18 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor // final 붙은것에 대해 생성자가 만들어짐.
+@RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    public Page<Question> getList(String kw, int page) {
+    public Page<Question> getList(String kw, int page, String sortCode) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); //한 페이지에 10까지 가능
+        switch (sortCode) {
+            case "OLD" -> sorts.add(Sort.Order.asc("id")); // 오래된순
+            default -> sorts.add(Sort.Order.desc("id")); // 최신순
+        }
 
-        if (kw == null || kw.trim().length() == 0) {
-            return this.questionRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
+
+        if ( kw == null || kw.trim().length() == 0 ) {
+            return questionRepository.findAll(pageable);
         }
 
         return questionRepository.findDistinctBySubjectContainsOrContentContainsOrAuthor_usernameContainsOrAnswerList_contentContainsOrAnswerList_author_username(kw, kw, kw, kw, kw, pageable);
@@ -38,7 +42,6 @@ public class QuestionService {
 
     public void create(String subject, String content, SiteUser author) {
         Question q = new Question();
-
         q.setSubject(subject);
         q.setContent(content);
         q.setAuthor(author);
