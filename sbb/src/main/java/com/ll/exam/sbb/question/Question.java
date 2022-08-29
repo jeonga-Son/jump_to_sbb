@@ -19,21 +19,14 @@ public class Question {
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
-
     @Column(length = 200) // varchar(200)
     private String subject;
-
     @Column(columnDefinition = "TEXT")
     private String content;
-
     private LocalDateTime createDate;
-
     private LocalDateTime modifyDate;
 
-    //이 컬럼은 생기지않음. 자바쪽에서 편하려고 달아놓음. 지워도 상관없음. answer 어디에 적혀있는지 알려주는 것.
-    //remove 걸어놔서 question 삭제되면 answer도 같이 삭제됨.
     @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
-    // 원래는 fetch타입이 lazy인데 EAGER로 변경
     private List<Answer> answerList = new ArrayList<>();
 
     @ManyToOne

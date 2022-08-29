@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,16 +21,14 @@ public class Answer {
     private String content;
 
     private LocalDateTime createDate;
-
     private LocalDateTime modifyDate;
 
-    @ManyToOne //이거를 붙여야 됨. 이거때문에 ForeignKey 만들어짐.
-    private Question question; //question에 참조값이 들어감
+    @ManyToOne
+    private Question question;
 
     @ManyToOne
     private SiteUser author;
 
-    //List를 사용하면 한번은 괜찮은데 계속 정보가 들어감?
     @ManyToMany
-    Set<SiteUser> voter;
+    List<SiteUser> voter;
 }
